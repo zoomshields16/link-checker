@@ -1,0 +1,12 @@
+https://github.com
+https://openjdk.org
+https://maven.apache.org
+https://junit.org
+https://www.python.org
+https://www.wikipedia.org
+https://news.ycombinator.com
+https://www.mozilla.org
+http://github.com
+https://github.com/zoomshields16/no-such-repo
+https://no-such-site.invalid
+http://example.com:81
