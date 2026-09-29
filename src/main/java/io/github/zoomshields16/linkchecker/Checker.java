@@ -20,6 +20,8 @@ final class Checker {
     record Result(String url, Status status, int code) {}
 
     private static final int MAX_IN_FLIGHT = 100;
+    // Some sites, like Wikipedia, reject the default Java user agent with a 403.
+    private static final String USER_AGENT = "link-checker/1.0 (+https://github.com/zoomshields16/link-checker)";
 
     private final HttpClient client;
     private final Duration timeout;
@@ -54,7 +56,10 @@ final class Checker {
 
     Result check(String url) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(URI.create(url)).timeout(timeout).build();
+            HttpRequest request = HttpRequest.newBuilder(URI.create(url))
+                    .timeout(timeout)
+                    .header("User-Agent", USER_AGENT)
+                    .build();
             HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
             // Only the status code matters, and the timeout stops at the headers, so skip the body.
             response.body().close();
