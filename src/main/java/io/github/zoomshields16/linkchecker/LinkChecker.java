@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 
 /** Command line tool that checks every link in a file and prints a report. */
 public final class LinkChecker {
@@ -56,7 +57,7 @@ public final class LinkChecker {
     }
 
     static String summary(List<Checker.Result> results, Duration elapsed) {
-        return "%d links: %d ok, %d redirect, %d broken, %d timed out in %.2fs".formatted(
+        return String.format(Locale.ROOT, "%d links: %d ok, %d redirect, %d broken, %d timed out in %.2fs",
                 results.size(),
                 count(results, Status.OK),
                 count(results, Status.REDIRECT),
