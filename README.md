@@ -17,7 +17,7 @@ callbacks, and the JDK's built-in `HttpClient` means there are no dependencies o
 - Each request has a 5 second limit, so one slow site can't hang the run.
 - Redirects are reported, not followed. A `301` shows up as `REDIRECT`.
 - The exit code is 1 if any link is broken or timed out, so it can fail a CI job. Bad usage
-  exits with 2.
+  or a missing file exits with 2.
 - `--sequential` checks the same links one at a time, for comparing speed.
 
 ## Speed
@@ -41,8 +41,10 @@ java -jar target/link-checker.jar urls.txt
 java -jar target/link-checker.jar --sequential urls.txt
 ```
 
-Run the tests with `./mvnw test`. They use a local server from the JDK, so they don't need
-the internet.
+The file has one URL per line. Blank lines are skipped.
+
+Run the tests with `./mvnw test`. They run against a local server from the JDK instead of real
+websites.
 
 ## Sample output
 Running it on the included `urls.txt`:
